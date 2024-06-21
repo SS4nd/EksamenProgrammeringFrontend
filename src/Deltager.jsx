@@ -17,7 +17,8 @@ function Deltager() {
   const [formValues, setFormValues] = useState({
     disciplinID: "",
     date: "",
-    score: ""
+    score: "",
+    resultatID: null // Used for tracking the ID of the result being edited
   });
 
   useEffect(() => {
@@ -62,45 +63,75 @@ function Deltager() {
       // Handle error
     }
   };
+
+  const handleEditResultat = (resultatId) => {
+    // Find the result in the state based on resultatId
+    const resultToEdit = resultat.find((item) => item.resultatID === resultatId);
+
+    // Set form values to populate the edit form
+    setFormValues({
+      disciplinID: resultToEdit.disciplin.disciplinID,
+      date: resultToEdit.dato,
+      score: resultToEdit.resultatværdi,
+      resultatID: resultatId // Set the resultatID for editing
+    });
+
+    // Optionally, you can set an edit mode or display a modal for editing
+    // This depends on your UI/UX design and how you want to handle editing.
+  };
+
   const handleNewResult = async (event) => {
     event.preventDefault();
     try {
       const headers = { Authorization: `Bearer ${token}` };
-  
+
       // Fetch deltager and disciplin to set in the new Resultat
       const [deltagerResponse, disciplinResponse] = await Promise.all([
         axios.get(`${API_URL}/api/deltager/${id}`, { headers }),
         axios.get(`${API_URL}/api/discipliner/${formValues.disciplinID}`, { headers })
       ]);
-  
+
       const deltager = deltagerResponse.data;
       const disciplin = disciplinResponse.data;
-  
+
       const newResult = {
         deltager: deltager,
         disciplin: disciplin,
         dato: formValues.date,
         resultatværdi: formValues.score
       };
-  
-      const resultatResponse = await axios.post(`${API_URL}/api/resultater`, newResult, { headers });
-      const createdResultat = resultatResponse.data;
-  
-      // Update state to reflect the new result
-      setResultat([...resultat, createdResultat]);
-  
+
+      let resultatResponse;
+      if (formValues.resultatID) {
+        // Update existing result
+        resultatResponse = await axios.put(`${API_URL}/api/resultater/${formValues.resultatID}`, newResult, { headers });
+      } else {
+        // Create new result
+        resultatResponse = await axios.post(`${API_URL}/api/resultater`, newResult, { headers });
+      }
+
+      const updatedResultat = resultat.map(item => {
+        if (item.resultatID === formValues.resultatID) {
+          // Update existing result in state
+          return resultatResponse.data;
+        }
+        return item;
+      });
+
+      setResultat(updatedResultat);
+
       // Clear form values after successful submission
       setFormValues({
         disciplinID: "",
         date: "",
-        score: ""
+        score: "",
+        resultatID: null // Clear the resultatID after update or creation
       });
     } catch (error) {
-      console.error("Error creating new result:", error);
+      console.error("Error creating/editing result:", error);
       // Handle error
     }
   };
-  
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -178,6 +209,12 @@ function Deltager() {
                         <td>{item.disciplin.navn}</td>
                         <td>{item.resultatværdi}</td>
                         <td>
+                          <button
+                            className="btn btn-warning me-2"
+                            onClick={() => handleEditResultat(item.resultatID)}
+                          >
+                            Edit
+                          </button>
                           <button
                             className="btn btn-danger"
                             onClick={() => handleDeleteResultat(item.resultatID)}
