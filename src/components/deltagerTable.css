@@ -1,0 +1,23 @@
+.table-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table-cell {
+    width: 25%; /* Each cell takes up 25% of the width */
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center; /* Center-align text */
+  }
+
+  .data-info {
+    margin-top: 5px;
+  }
+  

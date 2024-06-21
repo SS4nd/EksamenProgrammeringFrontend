@@ -1,0 +1,31 @@
+.sort-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Adjust the gap between buttons */
+    margin-bottom: 20px; /* Add space between buttons and table */
+  }
+  
+  .sort-buttons label {
+    display: block; /* Display labels as block to stack them vertically */
+  }
+  
+  .sort-buttons input[type="radio"] {
+    display: none; /* Hide the default radio button */
+  }
+  
+  .sort-buttons input[type="radio"] + span {
+    display: inline-block;
+    width: 200px; /* Adjust width to ensure all buttons are the same size */
+    padding: 12px 16px;
+    font-size: 14px;
+    text-align: center; /* Center text */
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    cursor: pointer;
+  }
+  
+  .sort-buttons input[type="radio"]:checked + span {
+    background-color: #007bff; /* Change background color when checked */
+    color: #fff; /* Change text color when checked */
+  }
+  

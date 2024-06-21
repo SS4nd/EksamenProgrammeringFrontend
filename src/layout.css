@@ -1,0 +1,78 @@
+.nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 555;
+  right: 0;
+  background: linear-gradient(
+    to bottom right,
+    #424242,
+    #1e1e1e
+  ); 
+  color: #fff;
+  padding: 1rem 0rem;
+  box-shadow: 0 10px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nav-header ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-header ul li {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.nav-header ul li:last-child {
+  margin-right: 0;
+}
+
+.nav-header ul li a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.nav-header ul li a:hover {
+  background-color: #fff; /* Change to desired hover background color */
+  color: #333; /* Change to desired hover text color */
+  border-color: #333; /* Change to desired hover border color */
+}
+.nav-header ul li a.active {
+  text-decoration: underline;
+}
+
+.page-content {
+  margin-top: -1rem;
+}
+
+  .nav-header ul li a.active {
+    text-decoration: underline;
+  }
+  
+  .page-content {
+    margin-top: 5rem;
+}
+
+.app-layout {
+  margin: 0%;
+}
+
+.nav-header h1 {
+  margin: 5px; /* Reset margin */
+  font-size: 140%;
+  padding-left: 10px; /* Reset padding */
+}
+
+p {
+  color: #fff;
+}

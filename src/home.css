@@ -1,0 +1,52 @@
+.home-container {
+  width: 100%;
+  margin: 0; /* Reset margin */
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  padding: 0%;
+}
+
+body {
+  overflow-y: scroll; /* Always show vertical scrollbar */
+}
+
+/* Hide scrollbar but keep ability to scroll */
+body::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar width */
+}
+
+/* Optional: Shift content slightly to the left to hide scrollbar */
+body {
+  margin-right: -15px; /* Adjust as needed */
+}
+
+.table-container {
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+
+.active-link {
+  font-weight: bold; /* Example: Highlight active link */
+  color: rgb(185, 199, 228); /* Example: Change color of active link */
+}
+
+
+body {
+  background-color: transparent !important;
+}
